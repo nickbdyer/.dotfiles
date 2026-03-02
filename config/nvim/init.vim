@@ -1,9 +1,3 @@
-if !has('nvim')
-  set nocompatible
-  set t_ut=
-  set ttyfast
-endif
-
 set background=light
 
 " source plugins
@@ -18,10 +12,8 @@ let g:gruvbox_contrast_light = "medium"
 let g:airline_theme='base16_gruvbox_light_medium'
 
 "Theme
-if &t_Co == 256
-  colorscheme gruvbox
-  set termguicolors
-endif
+colorscheme gruvbox
+set termguicolors
 
 let mapleader = "\<Space>"
 
@@ -45,7 +37,6 @@ set shiftwidth=2
 set softtabstop=2
 set bs=2
 set expandtab
-autocmd Filetype clojure setlocal ts=2 sw=2 sts=0 expandtab
 
 "stuff to do with wrapping lines
 set cursorline
@@ -101,7 +92,7 @@ set wildmode=list:longest,full
 "shortcut to edit vimrc - super useful
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
-" Let fzf ignore anything in my gitignore:wq
+" Let fzf ignore anything in my gitignore
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
 " Trailing whitespace
@@ -162,20 +153,9 @@ EOF
 " Map FZF to ctrl-p
 map <c-p> :execute 'FZF'<CR>
 
-" Disable elm-vim bindings
-let g:elm_setup_keybindings =0
-
 " ruby rocket
 imap <C-L> <SPACE>=><SPACE>
-
-"clojure
-autocmd BufNewFile,BufRead *.cljs set filetype=clojure
-autocmd BufNewFile,BufRead *.cljx set filetype=clojure
-autocmd BufNewFile,BufRead *.clj set filetype=clojure
-autocmd FileType clojure setlocal lispwords+=describe,it,context,around
 
 "copy paste
 set clipboard=unnamed
 
-"jsx
-let g:jsx_ext_required = 0
