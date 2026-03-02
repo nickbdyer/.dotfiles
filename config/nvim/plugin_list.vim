@@ -4,8 +4,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'https://github.com/roman/golden-ratio.git'
-Plug 'https://github.com/guns/vim-clojure-static.git'
-Plug 'https://github.com/kien/rainbow_parentheses.vim'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 
@@ -25,4 +23,3 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 call plug#end()
-
