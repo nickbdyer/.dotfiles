@@ -15,10 +15,8 @@ let g:gruvbox_contrast_light = "medium"
 let g:airline_theme='gruvbox'
 
 "Theme
-if &t_Co == 256
-  colorscheme gruvbox
-  set termguicolors
-endif
+colorscheme gruvbox
+set termguicolors
 
 let mapleader = "\<Space>"
 
