@@ -4,10 +4,10 @@ if !has('nvim')
   set ttyfast
 endif
 
-set background=dark
+set background=light
 
 " source plugins
-so ~/.vim/plugin_list.vim
+so ~/.config/nvim/plugin_list.vim
 
 filetype plugin indent on
 syntax on
@@ -15,7 +15,7 @@ syntax on
 " soft medium hard
 let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_contrast_light = "medium"
-let g:airline_theme='gruvbox'
+let g:airline_theme='base16_gruvbox_light_medium'
 
 "Theme
 if &t_Co == 256
@@ -134,8 +134,30 @@ nnoremap J mzJ`z
 "Airline Stuff
 let g:airline#extensions#tabline#enabled = 1
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
+" Completion (nvim-cmp)
+lua << EOF
+local ok, cmp = pcall(require, 'cmp')
+if not ok then return end
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>']     = cmp.mapping.abort(),
+    ['<CR>']      = cmp.mapping.confirm({ select = true }),
+    ['<Tab>']     = cmp.mapping.select_next_item(),
+    ['<S-Tab>']   = cmp.mapping.select_prev_item(),
+  }),
+  sources = cmp.config.sources({
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+  }),
+})
+EOF
 
 " Map FZF to ctrl-p
 map <c-p> :execute 'FZF'<CR>
@@ -151,11 +173,6 @@ autocmd BufNewFile,BufRead *.cljs set filetype=clojure
 autocmd BufNewFile,BufRead *.cljx set filetype=clojure
 autocmd BufNewFile,BufRead *.clj set filetype=clojure
 autocmd FileType clojure setlocal lispwords+=describe,it,context,around
-let vimclojure#FuzzyIndent=1
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
 
 "copy paste
 set clipboard=unnamed
