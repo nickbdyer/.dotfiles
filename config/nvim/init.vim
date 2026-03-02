@@ -93,7 +93,11 @@ set wildmode=list:longest,full
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 " Let fzf ignore anything in my gitignore
-let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+if executable('ag')
+  let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+else
+  let $FZF_DEFAULT_COMMAND = 'find . -type f'
+endif
 
 " Trailing whitespace
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/

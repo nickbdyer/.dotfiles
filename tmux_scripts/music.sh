@@ -7,7 +7,7 @@ if it is running then
 		set track_name to name of current track
 		set artist_name to artist of current track
 
-		if artist_name > 0
+		if artist_name is not ""
 			# If the track has an artist set and is therefore most likely a song rather than an advert
 			set t to "♫ " & artist_name & " - " & track_name
 
